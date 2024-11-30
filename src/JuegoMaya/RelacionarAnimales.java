@@ -17,7 +17,7 @@ public class RelacionarAnimales extends javax.swing.JFrame {
         {"Tssímin", "Caballo"}, {"Kekén", "Cerdo"},
         {"Ts'unu'un", "Colibri"},  {"T'u'ul", "Conejo"},
         {"T'eel", "Gallo"}, {"Miis", "Gato"},
-        {"Balam", "Jaguar"}, {"Balam", "Jaguar"},
+        {"Balam", "Jaguar"},
         {"Peépem", "Mariposa"}, {"Chi'ich", "Pajaro"},
         {"Peek'", "Perro"}, {"Kai", "Pez"},
         {"Kan", "Serpiente"}, {"Àak", "Tortuga"}};
