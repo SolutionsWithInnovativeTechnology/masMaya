@@ -37,6 +37,7 @@ public class RelacionarFrases extends javax.swing.JFrame {
         Botones.transparenciaButton(btnImgSoporte);
         Botones.transparenciaButtonBorder(reiniciar);
         comenzarJuego();
+        setResizable(false);
     }
     Timer timer = new Timer(250, new ActionListener(){
     @Override

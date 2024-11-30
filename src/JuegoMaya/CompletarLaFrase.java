@@ -36,6 +36,7 @@ public class CompletarLaFrase extends javax.swing.JFrame {
         Botones.transparenciaButtonBorder(opcion3);
         Botones.transparenciaButtonBorder(reiniciar);
         comenzarJuego();
+        setResizable(false);
     }
     
     private void comenzarJuego() {

@@ -115,7 +115,7 @@ public class JuegosNumeros extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Rompecabezas");
+        jLabel3.setText("Sumas");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -313,7 +313,7 @@ public class JuegosNumeros extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImgMemoramaActionPerformed
 
     private void btnImgPuzzleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgPuzzleActionPerformed
-        Puzzle entrar = new Puzzle(jugador);
+        Sumas entrar = new Sumas(jugador);
         entrar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnImgPuzzleActionPerformed

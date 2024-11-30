@@ -3,23 +3,19 @@ package JuegoMaya;
 import Util.BD;
 import Util.Botones;
 import Util.Jugador;
-import Util.ReproductorSonido;
+import java.awt.Image;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class AdivinaElAnimal extends javax.swing.JFrame {
-    private String[][] palabras = {{"Abeja", "Kaab"},{"Ballena", "Masam"}, {"Búho", "Tunkuluchú"}, 
-        {"Caballo", "Tssímin"}, {"Cerdo", "Kekén"}, {"Colibrí", "Ts'unu'un"}, {"Conejo", "T'u'ul"}, 
-        {"Gallo", "T'eel"}, {"Gato", "Miis"}, {"Jaguar", "Balam"}, {"Mariposa", "Peépem"}, {"Pájaro", "Chi'ich"}, 
-        {"Perro", "Peek'"}, {"Pez", "Kai"}, {"Serpiente", "Kan"}, {"Tortuga", "Àak"}};
-    private int palabra;
+public class Sumas extends javax.swing.JFrame {
+    private int numero1, numero2;
     int intentos;
-    private String[] opciones = new String[3];
+    private int[] opciones = new int[3];
     BD mBD;
     Jugador jugador;
-    ReproductorSonido reproductor = new ReproductorSonido();
     
-    public AdivinaElAnimal(Jugador jugador) {
+    public Sumas(Jugador jugador) {
         this.jugador=jugador;
         mBD = new BD("BD_maya?useSSL=false","root","");
         initComponents();
@@ -41,70 +37,113 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
         setResizable(false);
     }
     
-    private void reproducirAnimal(int i){
-        reproductor.cargarSonido("/sonidos/animales/" + i + ".wav");
-        reproductor.reproducir();
-    }
-    
     private void comenzarJuego() {
+        
         if(jugador.getPuntuacion() == 0){
             lblintentos.setVisible(false);
             lblIntentos.setVisible(false);
             intentos = 0;
-        }
-        else{
+        }else{
             intentos = 1;
             lblintentos.setVisible(true);
             lblIntentos.setVisible(true);
         }
-        lblIntentos.setText(intentos+"");
+        lblIntentos.setText(intentos + "");
         Random random = new Random();
-        palabra = random.nextInt(palabras.length);
-        String imagenPath = "/imgAnimales/" + palabras[palabra][0].toLowerCase() + ".png";
-        palabrap1.setIcon(new javax.swing.ImageIcon(getClass().getResource(imagenPath)));
-        opciones[0] = "";
-        opciones[1] = "";
-        opciones[2] = "";
-        opciones[0] = palabras[palabra][1];
-        int opcion;
-        for(int i = 1; i < 3; i++){
-            opcion = random.nextInt(6);
-            if((!palabras[opcion][1].equals(opciones[0]))&&(!palabras[opcion][1].equals(opciones[1]))){
-                opciones[i] = palabras[opcion][1];
-            } else {
-                i--;
-            }
-        }
+        numero1 = random.nextInt(6);
+        numero2 = random.nextInt(6);
         
-        String[] botones = {"","",""};
-        int cont=0;
-        while(cont<3){
-            int opcionAl= random.nextInt(3);
+        String imagenPath1 = "/imgCartas/png" + String.valueOf(numero1) + ".png";
+        String imagenPath2 = "/imgCartas/png" + String.valueOf(numero2) + ".png";
+
+        // Redimensionar las imágenes proporcionalmente
+        ImageIcon icon1 = new ImageIcon(getClass().getResource(imagenPath1));
+        ImageIcon icon2 = new ImageIcon(getClass().getResource(imagenPath2));
+
+        // Obtener las dimensiones originales de las imágenes
+        int originalWidth1 = icon1.getIconWidth();
+        int originalHeight1 = icon1.getIconHeight();
+        int originalWidth2 = icon2.getIconWidth();
+        int originalHeight2 = icon2.getIconHeight();
+
+        // Definir el tamaño máximo deseado (por ejemplo, un ancho máximo de 100 píxeles)
+        int maxWidth = 100;
+        int maxHeight = 100;
+
+        // Redimensionar la imagen 1 proporcionalmente
+        double scale1 = Math.min((double) maxWidth / originalWidth1, (double) maxHeight / originalHeight1);
+        int newWidth1 = (int) (originalWidth1 * scale1);
+        int newHeight1 = (int) (originalHeight1 * scale1);
+        Image image1 = icon1.getImage().getScaledInstance(newWidth1, newHeight1, Image.SCALE_SMOOTH);
+
+        // Redimensionar la imagen 2 proporcionalmente
+        double scale2 = Math.min((double) maxWidth / originalWidth2, (double) maxHeight / originalHeight2);
+        int newWidth2 = (int) (originalWidth2 * scale2);
+        int newHeight2 = (int) (originalHeight2 * scale2);
+        Image image2 = icon2.getImage().getScaledInstance(newWidth2, newHeight2, Image.SCALE_SMOOTH);
+
+        // Asignar las imágenes redimensionadas
+        numeroOperacion1.setIcon(new ImageIcon(image1));
+        numeroOperacion2.setIcon(new ImageIcon(image2));
+
+        opciones[0] = -1;
+        opciones[1] = -1;
+        opciones[2] = -1;
+        
+        opciones[0] = numero1 + numero2;
+        String imagenSumaResta = "/img/suma.png";
+        ImageIcon sumaIcon = new ImageIcon(getClass().getResource(imagenSumaResta));
+        Image sumaImage = sumaIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Redimensionar a 50x50
+        sumaIcon = new ImageIcon(sumaImage);
+        operacion.setIcon(sumaIcon);
+        
+
+        int opcion;
+        for (int i = 1; i < 3; i++) {
+            do {
+                opcion = random.nextInt(20);  // Generar un número aleatorio entre 0 y 19
+            } while (opcion == opciones[0] || opcion == opciones[1] || opcion == opciones[2]);
+            opciones[i] = opcion;
+        }
+
+        // Mezclar las opciones de manera aleatoria
+        String[] botones = {"", "", ""};
+        int cont = 0;
+        while (cont < 3) {
+            int opcionAl = random.nextInt(3);
             boolean repetido = false;
-            for(int i=0; i<3; i++){
-                if(botones[i].equals(opciones[opcionAl])){
+            for (int i = 0; i < 3; i++) {
+                if (botones[i].equals(String.valueOf(opciones[opcionAl]))) {
                     repetido = true;
                     break;
                 }
             }
-            if(!repetido){
-                botones[cont]=opciones[opcionAl];
+            if (!repetido) {
+                botones[cont] = String.valueOf(opciones[opcionAl]);
             } else {
-                cont--;
+                cont--;  // Volver a intentar si ya se encontró una opción repetida
             }
             cont++;
         }
+
+        // Asignar las opciones a los botones
         opcion1.setText(botones[0]);
         opcion2.setText(botones[1]);
         opcion3.setText(botones[2]);
+
+        // Habilitar los botones
         opcion1.setEnabled(true);
         opcion2.setEnabled(true);
         opcion3.setEnabled(true);
     }
     
-    private void comprobarPalabra(String palabraB) {
-        if(palabras[palabra][1].equals(palabraB )) {
-            reproducirAnimal(palabra);
+    private void comprobarPalabra(String respuestaJugador) {
+        int resultadoCorrecto = 0;
+        
+        resultadoCorrecto = numero1 + numero2;
+        
+        int respuesta= Integer.parseInt(respuestaJugador);
+        if(respuesta == resultadoCorrecto) {
             JOptionPane.showMessageDialog(this, "Felicidades, usted ha ganado 20 puntos.", "Win!!", JOptionPane.INFORMATION_MESSAGE);
             puntuacion(20);
             comenzarJuego();
@@ -146,7 +185,9 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
         lblintentos = new javax.swing.JLabel();
         lblIntentos = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        palabrap1 = new javax.swing.JLabel();
+        numeroOperacion1 = new javax.swing.JLabel();
+        numeroOperacion2 = new javax.swing.JLabel();
+        operacion = new javax.swing.JLabel();
         opcion1 = new javax.swing.JButton();
         opcion2 = new javax.swing.JButton();
         opcion3 = new javax.swing.JButton();
@@ -159,7 +200,7 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(162, 35, 29));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ADIVINA EL ANIMAL");
+        jLabel1.setText("SUMAS");
 
         btnImgRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngRegresar.png"))); // NOI18N
         btnImgRegresar.setBorder(null);
@@ -208,66 +249,76 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
         lblIntentos.setText("1");
 
         jPanel2.setBackground(new java.awt.Color(255, 237, 213));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(162, 35, 29), 3, true));
 
-        palabrap1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        palabrap1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroOperacion1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        numeroOperacion1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroOperacion1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(162, 35, 29), 3, true));
 
-        opcion1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        numeroOperacion2.setBackground(new java.awt.Color(255, 255, 255));
+        numeroOperacion2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        numeroOperacion2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroOperacion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(162, 35, 29), 3, true));
+
+        operacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        operacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(numeroOperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(operacion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(numeroOperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(numeroOperacion2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numeroOperacion1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(operacion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        opcion1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         opcion1.setText("opcion1");
-        opcion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 168, 107), 3));
+        opcion1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 168, 107), 3, true));
+        opcion1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         opcion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcion1ActionPerformed(evt);
             }
         });
 
-        opcion2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        opcion2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         opcion2.setText("opcion2");
-        opcion2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 168, 107), 3));
+        opcion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 168, 107), 3, true));
+        opcion2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         opcion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcion2ActionPerformed(evt);
             }
         });
 
-        opcion3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        opcion3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         opcion3.setText("opcion3");
-        opcion3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 168, 107), 3));
+        opcion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 168, 107), 3, true));
+        opcion3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         opcion3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcion3ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(palabrap1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcion1, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .addComponent(opcion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(opcion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(63, 63, 63))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(palabrap1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(opcion1)
-                        .addGap(36, 36, 36)
-                        .addComponent(opcion2)
-                        .addGap(36, 36, 36)
-                        .addComponent(opcion3)))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -285,7 +336,7 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnImgRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -298,17 +349,26 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
                                 .addComponent(reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(79, 79, 79)
                         .addComponent(btnImgInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(95, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnImgSoporte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnImgSoporte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(opcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(opcion2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(opcion3, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,14 +387,19 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(opcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnImgInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnImgRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(28, 28, 28))
+                            .addGap(16, 16, 16))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblintentos)
@@ -361,13 +426,13 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImgRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgRegresarActionPerformed
-        JuegosAnimales regresar = new JuegosAnimales(jugador);
+        JuegosNumeros regresar = new JuegosNumeros(jugador);
         regresar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnImgRegresarActionPerformed
 
     private void btnImgSoporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgSoporteActionPerformed
-        JOptionPane.showMessageDialog(this, "Selecciona la palabra en maya correspondiente al\nanimal que aparece en pantalla.", "Instrucciones", JOptionPane.INFORMATION_MESSAGE);   
+        JOptionPane.showMessageDialog(this, "Selecciona la opcion correspondiente a la\nsuma o resta que aparece en pantalla.", "Instrucciones", JOptionPane.INFORMATION_MESSAGE);   
     }//GEN-LAST:event_btnImgSoporteActionPerformed
 
     private void btnImgInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImgInicioActionPerformed
@@ -440,10 +505,12 @@ public class AdivinaElAnimal extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblintentos;
     private javax.swing.JLabel lblpuntuacionGlobal;
+    private javax.swing.JLabel numeroOperacion1;
+    private javax.swing.JLabel numeroOperacion2;
     private javax.swing.JButton opcion1;
     private javax.swing.JButton opcion2;
     private javax.swing.JButton opcion3;
-    private javax.swing.JLabel palabrap1;
+    private javax.swing.JLabel operacion;
     private javax.swing.JButton reiniciar;
     // End of variables declaration//GEN-END:variables
 }
