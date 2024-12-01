@@ -3,13 +3,24 @@ package JuegoMaya;
 import Util.BD;
 import Util.Botones;
 import Util.Jugador;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class RelacionarAnimales extends javax.swing.JFrame {
     private String[][] animales = {{"Kaab", "Abeja"}, 
@@ -17,11 +28,10 @@ public class RelacionarAnimales extends javax.swing.JFrame {
         {"Tssímin", "Caballo"}, {"Kekén", "Cerdo"},
         {"Ts'unu'un", "Colibri"},  {"T'u'ul", "Conejo"},
         {"T'eel", "Gallo"}, {"Miis", "Gato"},
-        {"Balam", "Jaguar"},
-        {"Peépem", "Mariposa"}, {"Chi'ich", "Pajaro"},
-        {"Peek'", "Perro"}, {"Kai", "Pez"},
-        {"Kan", "Serpiente"}, {"Àak", "Tortuga"}};
-    
+        {"Balam", "Jaguar"}, {"Peépem", "Mariposa"}, 
+        {"Chi'ich", "Pajaro"}, {"Peek'", "Perro"}, 
+        {"Kai", "Pez"}, {"Kan", "Serpiente"}, 
+        {"Àak", "Tortuga"}};
     private int[] animal = new int[8];
     private int intentos;
     private boolean botonPresionado;
@@ -30,7 +40,10 @@ public class RelacionarAnimales extends javax.swing.JFrame {
     private String segundaP;
     private JButton[] pbtn = new JButton [2];
     private String[][] opciones = new String[8][2];
+    private boolean[] botonesVerde = new boolean[16];
     Jugador jugador;
+    Color colorRojoBotones = new Color(0xA2, 0x23, 0x1D);//A2231D
+    Color colorVerdeBotones = new Color(0x00, 0xA8, 0x6B);//00A86B
     BD mBD;
     public RelacionarAnimales(Jugador jugador) {
         this.jugador=jugador;
@@ -60,13 +73,23 @@ public class RelacionarAnimales extends javax.swing.JFrame {
                 }
             }
             if(resultado) {
-                pbtn[0].setBorderPainted(true);
+                pbtn[0].setBorder(getRoundedBorder(colorVerdeBotones));  // Borde verde
                 pbtn[0].setEnabled(false);
-                pbtn[1].setBorderPainted(true);
+                int index1 = getButtonIndex(pbtn[0].getText());
+                if(index1 != -1) {
+                    botonesVerde[index1] = true;
+                }
+                pbtn[1].setBorder(getRoundedBorder(colorVerdeBotones));  // Borde verde
                 pbtn[1].setEnabled(false);
+                int index2 = getButtonIndex(pbtn[1].getText());
+                if(index2 != -1) {
+                    botonesVerde[index2] = true;
+                }
             } else if(intentos > 0){
+                pbtn[0].setBorder(getRoundedBorder(colorRojoBotones));  // Borde rojo
+                pbtn[1].setBorder(getRoundedBorder(colorRojoBotones));  // Borde rojo
                 intentos--;
-                lblIntentos.setText(intentos+"");
+                lblIntentos.setText(intentos + "");
                 pbtn[0].setEnabled(true);
                 pbtn[1].setEnabled(true);
             } else {
@@ -84,25 +107,60 @@ public class RelacionarAnimales extends javax.swing.JFrame {
     }
     });
     
+    private int getButtonIndex(String text) {
+        for (int i = 0; i < opciones.length; i++) {
+            // Recorre todas las combinaciones y checa si alguna coincide
+            if (opciones[i][0].equals(text) || opciones[i][1].equals(text)) {
+                return i;  // Retorna el índice o i del arreglo 'opciones'
+            }
+        }
+        return -1;  // Si no se encuentra, retorna -1
+    }
+    
+    // Borde redondeado
+    private Border getRoundedBorder(Color borderColor) {
+        return new LineBorder(borderColor, 5) {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setColor(getLineColor());
+                g2d.setStroke(new BasicStroke(getThickness()));
+                g2d.drawRoundRect(x, y, width - 1, height - 1, 20, 20);  // Radio de 20 para bordes redondeados
+            }
+        };
+    }
+    
+    //Redimensionar las imagenes
+    private ImageIcon resizeImageIcon(String imagePath, int width, int height) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+        Image img = icon.getImage();
+        Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
+    }
+
+    
     private void comenzarJuego() {
+        Arrays.fill(botonesVerde, false);
+        intentos = 2;
         botonPresionado = false;
         primerB = false;
-        opcion1.setBorderPainted(false);
-        opcion2.setBorderPainted(false);
-        opcion3.setBorderPainted(false);
-        opcion4.setBorderPainted(false);
-        opcion5.setBorderPainted(false);
-        opcion6.setBorderPainted(false);
-        opcion7.setBorderPainted(false);
-        opcion8.setBorderPainted(false);
-        opcion9.setBorderPainted(false);
-        opcion10.setBorderPainted(false);
-        opcion11.setBorderPainted(false);
-        opcion12.setBorderPainted(false);
-        opcion13.setBorderPainted(false);
-        opcion14.setBorderPainted(false);
-        opcion15.setBorderPainted(false);
-        opcion16.setBorderPainted(false);
+        opcion1.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion2.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion3.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion4.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion5.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion6.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion7.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion8.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion9.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion10.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion11.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion12.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion13.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion14.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion15.setBorder(getRoundedBorder(colorRojoBotones));
+        opcion16.setBorder(getRoundedBorder(colorRojoBotones));
         
         if(jugador.getPuntuacion() == 0){
             lblintentos.setVisible(true);
@@ -160,16 +218,17 @@ public class RelacionarAnimales extends javax.swing.JFrame {
             opcion[cont].setIcon(null);
             opcion[cont].setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
             opcion[cont].setContentAreaFilled(true);
+            opcion[cont].setBackground(new Color(255,237,213));
             aleatorio = random.nextInt(16);
             if(!botones[aleatorio].equals("")){
                 opcion[cont].setText(botones[aleatorio]);
                 opcion[cont].setName(botones[aleatorio]);
                 if(aleatorio >= 8){
-                    String imagePath = "/imgAnimales1/" + botones[aleatorio].toLowerCase() + ".png";
+                    String imagePath = "/imgAnimales2/" + botones[aleatorio].toLowerCase() + ".png";
                     opcion[cont].setHorizontalTextPosition(SwingConstants.CENTER);
-                    opcion[cont].setOpaque(false);
-                    opcion[cont].setContentAreaFilled(false);
-                    opcion[cont].setIcon(new javax.swing.ImageIcon(getClass().getResource(imagePath)));
+                    opcion[cont].setOpaque(true);
+                    opcion[cont].setContentAreaFilled(true);
+                    opcion[cont].setIcon(resizeImageIcon(imagePath, 91, 70));
                 }
                 
                 for(int i = 0; i < animales.length; i++){
@@ -202,9 +261,18 @@ public class RelacionarAnimales extends javax.swing.JFrame {
     }
     
     private void comprobarGanador() {
-        if(opcion1.isBorderPainted() && opcion2.isBorderPainted() && 
-                opcion3.isBorderPainted() && opcion4.isBorderPainted() && 
-                opcion5.isBorderPainted() && opcion6.isBorderPainted()){
+        boolean todasCorrectas = true;
+        
+        //Verifica si los botones estan en verde
+        for(int i=0; i<8; i++){
+            if(!botonesVerde[i]){
+                todasCorrectas = false;
+                System.out.println("Botón en índice " + i + " aún no está en verde.");
+                break;
+            }
+        }
+        
+        if(todasCorrectas){
             if(intentos == 0 && jugador.getPuntuacion() >= 10){
                 puntuacion(10);
                 JOptionPane.showMessageDialog(this, "Usted ha ganado 10 puntos.", "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
@@ -566,29 +634,29 @@ public class RelacionarAnimales extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(opcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(opcion2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(opcion3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(opcion4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                            .addComponent(opcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opcion2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opcion3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opcion4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(opcion5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(opcion6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(opcion7, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(opcion8, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                            .addComponent(opcion5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opcion6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opcion7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opcion8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion9, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcion11, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcion10, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcion12, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(opcion9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion13, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcion15, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcion14, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcion16, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(opcion13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcion16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblintentos)

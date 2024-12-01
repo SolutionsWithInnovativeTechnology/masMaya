@@ -162,35 +162,35 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="opcion1" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="opcion2" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="opcion3" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="opcion4" alignment="3" min="-2" pref="86" max="-2" attributes="0"/>
+                              <Component id="opcion1" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="opcion2" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="opcion3" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="opcion4" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="opcion5" alignment="3" min="-2" pref="86" max="-2" attributes="0"/>
-                              <Component id="opcion6" alignment="3" min="-2" pref="86" max="-2" attributes="0"/>
-                              <Component id="opcion7" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                              <Component id="opcion8" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="opcion5" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="opcion6" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="opcion7" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="opcion8" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="opcion9" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="opcion11" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="opcion10" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="opcion12" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="opcion9" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="opcion11" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="opcion10" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="opcion12" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="opcion13" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="opcion15" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="opcion14" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="opcion16" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="opcion13" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="opcion15" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="opcion14" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="opcion16" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="lblintentos" alignment="3" min="-2" max="-2" attributes="0"/>

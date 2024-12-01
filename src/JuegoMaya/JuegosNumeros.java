@@ -88,12 +88,12 @@ public class JuegosNumeros extends javax.swing.JFrame {
         });
 
         btnImgPuzzle.setBackground(new java.awt.Color(255, 237, 213));
-        btnImgPuzzle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngPuzzleImg.png"))); // NOI18N
+        btnImgPuzzle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngSumas.png"))); // NOI18N
         btnImgPuzzle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 168, 107), 3, true));
         btnImgPuzzle.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnImgPuzzle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnImgPuzzle.setPreferredSize(new java.awt.Dimension(150, 120));
-        btnImgPuzzle.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngPuzzleImg1.png"))); // NOI18N
+        btnImgPuzzle.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngSumas1.png"))); // NOI18N
         btnImgPuzzle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImgPuzzleActionPerformed(evt);
