@@ -32,7 +32,6 @@ public class Categorias extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnImgNumeros = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         btnImgFrutas = new javax.swing.JButton();
         btnImgInicio = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -45,9 +44,9 @@ public class Categorias extends javax.swing.JFrame {
         lblpuntuacionGlobal = new javax.swing.JLabel();
         btnImgFrasesCotidianas = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        lblSaludo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         label1 = new javax.swing.JLabel();
+        lblSaludo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("+Maya");
@@ -79,10 +78,6 @@ public class Categorias extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnImgNumeros, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 140, 165, 158));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Hecho por: María, Alonso y Saúl");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 595, -1, -1));
 
         btnImgFrutas.setBackground(new java.awt.Color(255, 237, 213));
         btnImgFrutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngFrutas.png"))); // NOI18N
@@ -146,7 +141,7 @@ public class Categorias extends javax.swing.JFrame {
         });
         jPanel1.add(btnRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 587, 81, 33));
 
-        lblUsuario.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lblUsuario.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         lblUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 0, 168, 38));
 
@@ -172,12 +167,6 @@ public class Categorias extends javax.swing.JFrame {
         jLabel7.setText("FRASES COMUNES");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 501, 165, -1));
 
-        lblSaludo.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        lblSaludo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSaludo.setText("Saludo");
-        lblSaludo.setToolTipText("");
-        jPanel1.add(lblSaludo, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 0, 274, 38));
-
         jPanel2.setBackground(new java.awt.Color(255, 237, 213));
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -187,19 +176,25 @@ public class Categorias extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(731, 731, 731)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
-                .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 532, 359, -1));
+
+        lblSaludo.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        lblSaludo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSaludo.setText("Saludo");
+        lblSaludo.setToolTipText("");
+        jPanel1.add(lblSaludo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 38));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -316,7 +311,6 @@ public class Categorias extends javax.swing.JFrame {
     private javax.swing.JButton btnImgNumeros;
     private javax.swing.JButton btnRanking;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

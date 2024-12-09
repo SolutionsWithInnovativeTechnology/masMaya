@@ -25,7 +25,6 @@ public class InformacionFrasesComunes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnImgRegresar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         btnImgAyuda = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
@@ -66,10 +65,6 @@ public class InformacionFrasesComunes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnImgRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 35, 35));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Hecho por: María, Alonso y Saúl");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 640, -1, -1));
 
         btnImgAyuda.setBackground(new java.awt.Color(255, 237, 213));
         btnImgAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngAyuda.png"))); // NOI18N
@@ -439,7 +434,6 @@ public class InformacionFrasesComunes extends javax.swing.JFrame {
     private javax.swing.JButton btnImgAyuda;
     private javax.swing.JButton btnImgRegresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl10;

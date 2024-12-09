@@ -58,11 +58,6 @@
                   <Component id="btnImgAyuda" min="-2" pref="54" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="329" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="102" max="32767" attributes="0"/>
                   <Component id="btnImgPlay" min="-2" pref="240" max="-2" attributes="0"/>
@@ -76,12 +71,8 @@
                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="btnImgPlay" min="-2" pref="240" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnImgAyuda" min="-2" pref="59" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnImgAyuda" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btnImgSoporte" min="-2" pref="59" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -146,12 +137,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImgPlayActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Hecho por: Mar&#xed;a, Alonso y Sa&#xfa;l"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnImgAyuda">
           <Properties>

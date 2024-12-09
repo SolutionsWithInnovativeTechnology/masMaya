@@ -42,7 +42,6 @@ public class JuegosAnimales extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnImgInfo = new javax.swing.JButton();
         btnImgInicio = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         btnImgRegresar = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -205,9 +204,6 @@ public class JuegosAnimales extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Hecho por: María, Alonso y Saúl");
-
         btnImgRegresar.setBackground(new java.awt.Color(255, 237, 213));
         btnImgRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngRegresar.png"))); // NOI18N
         btnImgRegresar.setBorder(null);
@@ -254,8 +250,6 @@ public class JuegosAnimales extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnImgInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
                         .addComponent(btnImgInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))))
         );
@@ -277,9 +271,7 @@ public class JuegosAnimales extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnImgInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addComponent(btnImgInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnImgInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -386,7 +378,6 @@ public class JuegosAnimales extends javax.swing.JFrame {
     private javax.swing.JButton btnImgRegresar;
     private javax.swing.JButton btnImgRelacionar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

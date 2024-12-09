@@ -61,7 +61,6 @@ public class InformacionNumeros extends javax.swing.JFrame {
         btn19 = new javax.swing.JButton();
         btn20 = new javax.swing.JButton();
         btnImgRegresar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         lblNumero = new javax.swing.JLabel();
@@ -264,10 +263,6 @@ public class InformacionNumeros extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnImgRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 35, 35));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Hecho por: María, Alonso y Saúl");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, -1, -1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pngInformaciónImg.png"))); // NOI18N
@@ -490,7 +485,6 @@ public class InformacionNumeros extends javax.swing.JFrame {
     private javax.swing.JButton btnImgRegresar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblNumero;
     // End of variables declaration//GEN-END:variables
